@@ -27,7 +27,7 @@
     'qweb': [
         'static/src/xml/QrPayPopupWidget.xml',
     ],
-    'website': 'https://www.giant.com',
+    'website': 'https://www.facebook.com/the.tam.944023',
     'license': 'LGPL-3',
     'images': ['static/description/gif.gif'],
 }
