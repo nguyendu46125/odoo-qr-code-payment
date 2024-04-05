@@ -27,5 +27,5 @@
     ],
     'website': 'https://www.giant.com',
     'license': 'LGPL-3',
-    'images': ['static/description/icon.png'],
+    'images': ['static/description/gif.gif'],
 }
