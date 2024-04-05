@@ -8,6 +8,8 @@
     'category': 'Point of Sale',
     'sequence': 41,
     'summary': 'POS QR Payment',
+    'price': '99.0',
+    'currency': 'USD',
     'description': "",
     'depends': ['base', 'point_of_sale', 'bus'],
     'data': [
