@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_pos_qr_payment,pos_qr_payment,model_pos_qr_payment,,1,1,0,0
+access_pos_qr_payment_line,pos_qr_payment_line,model_pos_qr_payment_line,,1,1,0,0
+access_pos_qr_payment_logs,pos_qr_payment_logs,model_pos_qr_payment_logs,,1,1,0,0
+

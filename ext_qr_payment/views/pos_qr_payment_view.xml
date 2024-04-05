@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_pos_qr_payment_tree" model="ir.ui.view">
+        <field name="name">pos.qr.payment.tree</field>
+        <field name="model">pos.qr.payment</field>
+        <field name="priority">4</field>
+        <field name="arch" type="xml">
+            <tree string="Qr Payment" class="o_sale_order">
+                <field name="order_id"/>
+                <field name="session_id"/>
+                <field name="user_id"/>
+                <field name="partner_id"/>
+                <field name="date_pay"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_pos_qr_payment_form" model="ir.ui.view">
+        <field name="name">pos.qr.payment.form</field>
+        <field name="model">pos.qr.payment</field>
+        <field name="arch" type="xml">
+            <form string="Qr Payment Item">
+                <header>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,paid"/>
+                </header>
+                <sheet>
+                    <widget name="web_ribbon" title="New" bg_color="bg-primary"
+                            attrs="{'invisible':[('state', '!=', 'draft')]}"/>
+                    <widget name="web_ribbon" title="Paid" bg_color="bg-success"
+                            attrs="{'invisible':[('state', '!=', 'paid')]}"/>
+                    <widget name="web_ribbon" title="False" bg_color="bg-danger"
+                            attrs="{'invisible':[('state', '!=', 'false')]}"/>
+                    <div>
+                        <group>
+                            <div class="oe_title">
+                                <h3>
+                                    <field name="name"/>
+                                </h3>
+                            </div>
+                        </group>
+                    </div>
+                    <group>
+                        <group name="qr_code_info" string="Thông Tin Qr"
+                               style="font-size:12px">
+                            <field name="order_id" string="Order ID"/>
+                            <field name="date_pay"/>
+                        </group>
+                        <group name="qr_code" string="Thông Tin Showroom"
+                               style="font-size:12px">
+                            <field name="session_id"/>
+                            <field name="partner_id"/>
+                            <field name="user_id"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name="qr_payment_request" string="Requests">
+                            <field name="qr_payment_line" readonly="1">
+                                <form string="Requests" readonly="1">
+                                    <group>
+                                        <group>
+                                            <field name="request_id" string="Request ID(yyyy/mm/dd/hh/mm/ss)"/>
+                                            <field name="request_id_vtb" string="Request ID Vietinbak"/>
+                                            <field name="transaction_date" string="Date Vietinbak call API"/>
+                                            <field name="vtb_bank_transaction_id" string="ID Transaction"/>
+                                        </group>
+                                        <group>
+                                            <field name="date_create_pos" eval="datetime.now() + timedelta(hours=7)"/>
+                                            <field name="amount"/>
+                                            <field name="payment_state"/>
+                                            <field name="vtb_status_mes"/>
+                                        </group>
+                                    </group>
+                                </form>
+                                <tree
+                                        string="Requests"
+                                        editable="bottom"
+                                >
+                                    <field name="request_id"/>
+                                    <field name="date_create_pos"/>
+                                    <field name="amount"/>
+                                    <field name="payment_state"/>
+                                </tree>
+                            </field>
+                            <div class="oe_clear"/>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_pos_qr_payment" model="ir.actions.act_window">
+        <field name="name">Pos QR Payment</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">pos.qr.payment</field>
+        <field name="view_id" ref="view_pos_qr_payment_tree"/>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Du-IT!
+            </p>
+            <p>
+                Once the quotation is confirmed by the customer, it becomes a sales order.
+                <br/>
+                You will be able to create an invoice and collect the payment.
+            </p>
+        </field>
+    </record>
+
+    <menuitem id="menu_pos_qr_payment"
+              action="action_pos_qr_payment"
+              name="QR Payment"
+              parent="account.menu_finance_receivables"
+              sequence="15"/>
+
+</odoo>
