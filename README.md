@@ -1,0 +1,1 @@
+# odoo-qr-code-payment
